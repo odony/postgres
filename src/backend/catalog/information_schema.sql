@@ -108,7 +108,7 @@ $$SELECT
        THEN CASE WHEN $2 = -1 /* default typmod */
                  THEN CAST(2^30 AS integer)
                  ELSE information_schema._pg_char_max_length($1, $2) *
-                      pg_catalog.pg_encoding_max_length((SELECT encoding FROM pg_catalog.pg_database WHERE datname = pg_catalog.current_database()))
+                      pg_catalog.pg_encoding_max_length(pg_catalog.pg_char_to_encoding(pg_catalog.getdatabaseencoding()))
             END
        ELSE null
   END$$;
